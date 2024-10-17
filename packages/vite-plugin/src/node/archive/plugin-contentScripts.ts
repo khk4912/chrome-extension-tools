@@ -423,7 +423,10 @@ export const pluginContentScripts: CrxPluginFn = ({
             if (browser !== 'firefox') {
               // change the extension origin on every reload
               // not allowed in FF b/c FF does this by default
-              war.use_dynamic_url = true
+              // war.use_dynamic_url = true
+              
+              // not using dynamic urls becuase of CSP issues
+              war.use_dynamic_url = false
             }
 
             manifest.web_accessible_resources.push(war)
@@ -522,7 +525,7 @@ export const pluginContentScripts: CrxPluginFn = ({
                       | WebAccessibleResourceByMatch = {
                       matches: script.matches,
                       resources: [...assets, ...imports],
-                      use_dynamic_url: true,
+                      // use_dynamic_url: true,
                     }
 
                     if (css.size)
